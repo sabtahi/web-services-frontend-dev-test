@@ -6,19 +6,15 @@ Please complete as much of the assignment as you can in the allotted time. You d
 
 If you have any questions or notice something is not working (like the API, or any of the links in this document), please contact webdevs@carleton.ca.
 
-
 ## Project requirements
-
 
 * Only front-end code will be considered in this project: HTML5, CSS and Javascript.
 * The project can be written in pure javascript or use frameworks like React, Vue.js or others.
 * CSS preprocessors can be used at will.
-* CSS frameworks are not allowed. All CSS code must be written by you.
+* CSS frameworks like Tailwind are cool. So are styled components and pure CSS. Whichever you prefer.
 * Package managers and task runners can be used at will.
 
-
 ## Submission Instructions
-
 
 * Create a fork of this repo.
 * Develop and version this project using git.
@@ -28,7 +24,6 @@ If you have any questions or notice something is not working (like the API, or a
 
 ## Rating criteria
 
-* Loyalty to the requested layout;
 * Loyalty to requested features;
 * Semantically structured HTML;
 * Accesbility (WCAG 2.0 AA)
@@ -39,36 +34,27 @@ If you have any questions or notice something is not working (like the API, or a
 
 * Use of GitFlow for each step
 * Use of TypeScript
-* Test development;
+* Use of TailwindCSS or follow some CSS style guide
 * Use of Clean Code Techniques
-* Follow some Javascript style guide;
-* Follow some CSS style guide;
-* Componentization and extensibility of Javascript components;
-* Apply transition animations.
-
+* Follow some Javascript style guide
+* Adapt the view to be responsive
+* Componentization and extensibility of Javascript components
+* Apply transition animations
 
 ## DOUBLE Bonus Points 
 
+* Add creative extra features, we all love cool functionality and nice designs
 * When searching, highlight the matched search characters (only what's matched) in the hero cards. 
 * Create a user customization option (e.g. dark mode / grid vs list view) 
 * Persist the data when the user reload the page
-* Adapt the view to be Responsive (mobile/tablet)
-
-
-## TRIPLE Bonus Points
-
-* Add creative extra features
-
 
 # Assessment
-
 
 ## Part 1
 
 The first step of the assignment is to fetch data from this public JSON API, and present the information on the screen. The route to fetch the data is:
 
 https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/all.json
-
 
 You do not need any credentials to access the URL above. The goal of this part is to present the data as a list on the screen like below:
 
@@ -86,13 +72,11 @@ The second step of the assignment is to style the data in the previous part usin
 
 If you are having difficulties replicating this part exactly and it is taking too long, move onto the next part. The future steps do not measure your ability to write CSS and HTML.
 
-
 ## Part 3
 In this part, you are going to add a text input, where a user can filter the list of heroes by their name as you can see on the images below.
 
 <img src='./images/03.png'/>
 <img src='./images/04.png'/>
-
 
 ## Part 4
 
@@ -101,12 +85,10 @@ In this part, you are going to make each hero have an expandable list view, so t
 <img src='./images/05.png'/>
 <img src='./images/06.png'/>
 
-
 ## Part 5
 In this part, you will add a text field in the expanded view of each hero to add tags about the hero. Here is what it looks like (added a tag called “love”):
 
 <img src='./images/07.png'/>
-
 
 ## Part 6
 **In this last part**, you will add a tag bar to filter hero based on tags. Do not be concerned with filtering both by name and tags at the same time. 
@@ -114,11 +96,9 @@ In this part, you will add a text field in the expanded view of each hero to add
 The Image bellow shows only the Super Heroes with the tag ***"love"***
 <img src='./images/08.png'/>
 
-
 The Image bellow shows only the Super Heroes with the tag ***"hate"***
 
 <img src='./images/09.png'/>
-
 
 ## References
 
