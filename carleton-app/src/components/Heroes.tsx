@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
-import Error from "./Error";
-
+import ErrorComponent from "./ErrorComponent";
 import FilterComponent from "./FilterComponent";
 import Loader from "./Loader";
 import TagComponent from "./TagComponent";
@@ -103,14 +102,16 @@ function Heroes() {
   ));
 
   if (loading) return <Loader />;
-  if (!data) return <Error />;
+  if (!data) return <ErrorComponent message="No data available!" />;
   const heroesList = (
     <div className="heroes-list">
       <FilterComponent
         filterName={filterName}
         handleInputChange={handleInputChange}
       />
-
+      {filteredHeroesList.length === 0 ? (
+        <ErrorComponent message="No hero found with the provided name!" />
+      ) : null}
       <div className="added-tags">{tagRectangles}</div>
 
       {filteredHeroesList.map((hero: HeroesData, index) => {

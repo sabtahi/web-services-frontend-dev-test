@@ -1,0 +1,12 @@
+.error-message {
+  background-color: #ffcccc; 
+  color: #730101; 
+  padding: 10px;
+  border-radius: 5px;
+  margin: 20px;
+}
+.error-message h4 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

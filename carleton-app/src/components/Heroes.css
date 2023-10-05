@@ -1,5 +1,6 @@
 .heroes-list {
-  width: 540px;
+  min-width: 540px;
+  min-height: 1040px;
   flex-direction: column;
   align-items: center;
   display: flex;
@@ -15,7 +16,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgb(227, 227, 227);
+  background-color: rgb(203, 203, 203);
 }
 
 .card-container {

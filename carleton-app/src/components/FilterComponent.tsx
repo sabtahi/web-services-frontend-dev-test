@@ -1,5 +1,6 @@
-import "./FilterComponent.css";
 import { FilterComponentProps } from "./types";
+
+import "./FilterComponent.css";
 
 const FilterComponent: React.FC<FilterComponentProps> = ({
   filterName,
@@ -10,7 +11,7 @@ const FilterComponent: React.FC<FilterComponentProps> = ({
       <input
         type="text"
         className="filter-text-input"
-        placeholder="Search by name"
+        placeholder="Search by name or tag"
         value={filterName}
         onChange={handleInputChange}
       />
