@@ -38,7 +38,12 @@ function Heroes() {
     if (tagName.trim() !== "") {
       setTags((prevTags) => {
         const newTags = { ...prevTags };
-        newTags[heroId] = [...(newTags[heroId] || []), tagName];
+        const existingTags = newTags[heroId] || [];
+
+        if (!existingTags.includes(tagName)) {
+          newTags[heroId] = [...existingTags, tagName];
+        }
+
         return newTags;
       });
       setTagName("");
