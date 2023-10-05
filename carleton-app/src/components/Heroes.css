@@ -11,7 +11,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
 }
 
 .card-container {
@@ -19,12 +18,24 @@
   height: 200px;
   justify-content: center;
   background-color: rgb(253, 253, 251);
-  border-radius: 25px;
+  border-radius: 20px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   display: grid;
-  grid-template-columns: 0.75fr 1fr;
+  grid-template-columns: 0.75fr 1fr 0.2fr;
   margin: 20px;
+  margin-top: 0px;
   overflow: hidden;
+}
+.card-container.expanded {
+  height: auto;
+}
+
+.card-container.expanded .powers-list {
+  display: block;
+}
+
+.powers-list {
+  display: none;
 }
 
 .blue-item {
@@ -42,13 +53,31 @@
 
 .filter-input {
   width: 480px;
-  margin: 20px;
+  margin-top: 20px;
+  margin-left: 20px;
 }
 
-.text-input {
+.filter-text-input {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.toggle {
+  cursor: pointer;
+  padding-top: 20px;
+}
+
+.toggle-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f2f2;
+  color: rgb(68, 66, 66);
+  font-weight: bold;
 }
