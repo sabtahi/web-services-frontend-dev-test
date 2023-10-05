@@ -1,8 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { HeroesData } from "./heroesInterfaces";
+import { useEffect, useState } from "react";
+
+import Error from "./Error";
+import FilterComponent from "./FilterComponent";
+import Loader from "./Loader";
+import TagComponent from "./TagComponent";
+import { HeroesData } from "./types";
+
 import "./Heroes.css";
 
 function Heroes() {
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState<HeroesData[]>([]);
   const [filterName, setFilterName] = useState("");
   const [tags, setTags] = useState<Record<number, string[]>>({});
@@ -15,12 +22,15 @@ function Heroes() {
   );
 
   async function fetchData() {
+    setLoading(true);
     const response = await fetch(
       "https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/all.json"
     );
     const json = await response.json();
+    setLoading(false);
     setData(json);
   }
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -51,7 +61,7 @@ function Heroes() {
     setFilterName(inputValue);
   };
 
-  const handleTagInputChange = (event: any) => {
+  const handleTagInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTagName(event.target.value);
   };
 
@@ -91,17 +101,15 @@ function Heroes() {
     </div>
   ));
 
+  if (loading) return <Loader />;
+  if (!data) return <Error />;
   const heroesList = (
     <div className="heroes-list">
-      <div className="filter-input">
-        <input
-          type="text"
-          className="filter-text-input"
-          placeholder="Search by name"
-          value={filterName}
-          onChange={handleInputChange}
-        />
-      </div>
+      <FilterComponent
+        filterName={filterName}
+        handleInputChange={handleInputChange}
+      />
+
       <div className="added-tags">{tagRectangles}</div>
 
       {filteredHeroesList.map((hero: HeroesData, index) => {
@@ -127,7 +135,7 @@ function Heroes() {
                 <div>
                   <div className="powers-list">
                     <h3 className="title">Powers</h3>
-                    <p>Inteligence: {hero.powerstats.intelligence}%</p>
+                    <p>Intelligence: {hero.powerstats.intelligence}%</p>
                     <p>Strength: {hero.powerstats.strength}%</p>
                     <p>Speed: {hero.powerstats.speed}%</p>
                     <p>Durability: {hero.powerstats.durability}%</p>
@@ -135,29 +143,12 @@ function Heroes() {
                     <p>Combat: {hero.powerstats.combat}%</p>
                   </div>
 
-                  <h3 className="title">Tags</h3>
-                  <div className="tag">
-                    <input
-                      type="text"
-                      className="tag-text-input"
-                      placeholder="Add tag"
-                      value={tagName}
-                      onChange={handleTagInputChange}
-                    />
-                    <button
-                      className="tag-button"
-                      onClick={() => handleAddTag(heroId)}
-                    >
-                      Add tag
-                    </button>
-                  </div>
-                  <div>
-                    {heroTags.map((tag, tagIndex) => (
-                      <div key={tagIndex} className="tag-rectangle">
-                        {tag}
-                      </div>
-                    ))}
-                  </div>
+                  <TagComponent
+                    tagName={tagName}
+                    handleTagInputChange={handleTagInputChange}
+                    handleAddTag={() => handleAddTag(heroId)}
+                    heroTags={heroTags}
+                  />
                 </div>
               )}
             </div>
@@ -174,6 +165,7 @@ function Heroes() {
       })}
     </div>
   );
+
   return <div className="body">{heroesList}</div>;
 }
 

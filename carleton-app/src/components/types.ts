@@ -21,3 +21,17 @@ export interface HeroesData {
     combat: number;
   };
 }
+
+export interface FilterComponentProps {
+    filterName: string;
+    handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+  
+export interface TagComponentProps {
+    tagName: string;
+    handleTagInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    handleAddTag: () => void;
+    heroTags: string[];
+  }
+  
+  
