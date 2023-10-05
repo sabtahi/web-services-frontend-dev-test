@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import Error from "./Error";
+
 import FilterComponent from "./FilterComponent";
 import Loader from "./Loader";
 import TagComponent from "./TagComponent";
@@ -122,9 +123,12 @@ function Heroes() {
             key={index}
             className={`card-container ${isExpanded ? "expanded" : ""}`}
           >
-            <div className="card-image">
-              <img src={hero.images.sm} alt="React Image" />
-            </div>
+            <div
+              className="card-image"
+              style={{
+                backgroundImage: `url(${hero.images.sm})`,
+              }}
+            ></div>
             <div className={colorClass}>
               <h2>{hero.name}</h2>
               <p>Fullname: {hero.biography.fullName}</p>
