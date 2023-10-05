@@ -4,6 +4,7 @@ import "./Heroes.css";
 
 function Heroes() {
   const [data, setData] = useState<HeroesData[]>([]);
+  const [filterName, setFilterName] = useState("");
 
   async function fetchData() {
     const response = await fetch(
@@ -16,9 +17,26 @@ function Heroes() {
     fetchData();
   }, []);
 
+  const handleInputChange = (event: any) => {
+    setFilterName(event.target.value);
+  };
+
+  const filteredHeroes = data.filter((hero) =>
+    hero.name.toLowerCase().includes(filterName.toLowerCase())
+  );
+
   const heroesList = (
-    <div className="test">
-      {data.map((hero: HeroesData, index) => {
+    <div className="heroes-list">
+      <div className="filter-input">
+        <input
+          type="text"
+          className="text-input"
+          placeholder="Search by name"
+          value={filterName}
+          onChange={handleInputChange}
+        />
+      </div>
+      {filteredHeroes.map((hero: HeroesData, index) => {
         const colorClass = index % 6 < 3 ? "blue-item" : "red-item";
         return (
           <div key={index} className="card-container">
@@ -37,7 +55,7 @@ function Heroes() {
       })}
     </div>
   );
-  return <div className="body"> {heroesList}</div>;
+  return <div className="body">{heroesList}</div>;
 }
 
 export default Heroes;

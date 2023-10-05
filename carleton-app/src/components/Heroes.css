@@ -1,3 +1,12 @@
+.heroes-list {
+  display: flex;
+  background-color: rgb(239, 234, 234);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
 .body {
   display: flex;
   align-items: center;
@@ -6,7 +15,7 @@
 }
 
 .card-container {
-  max-width: 500px;
+  width: 500px;
   height: 200px;
   justify-content: center;
   background-color: rgb(253, 253, 251);
@@ -17,6 +26,7 @@
   margin: 20px;
   overflow: hidden;
 }
+
 .blue-item {
   color: blue;
 }
@@ -30,11 +40,15 @@
   object-fit: cover;
 }
 
-.test {
-  display: flex;
-  background-color: rgb(239, 234, 234);
+.filter-input {
+  width: 480px;
+  margin: 20px;
+}
+
+.text-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  border-radius: 15px;
-  display: inline-block;
-  vertical-align: middle;
 }
