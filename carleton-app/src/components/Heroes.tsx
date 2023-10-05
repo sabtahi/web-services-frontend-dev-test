@@ -80,6 +80,17 @@ function Heroes() {
     allTags.push(...heroTags);
   });
 
+  const tagRectangles = Array.from(new Set(allTags)).map((tag, index) => (
+    <div
+      key={index}
+      className={`tag-rectangle ${
+        tag.toLowerCase() === filterName.toLowerCase() ? "selected" : ""
+      }`}
+    >
+      {tag}
+    </div>
+  ));
+
   const heroesList = (
     <div className="heroes-list">
       <div className="filter-input">
@@ -91,13 +102,7 @@ function Heroes() {
           onChange={handleInputChange}
         />
       </div>
-      <div className="added-tags">
-        {Array.from(new Set(allTags)).map((tag, index) => (
-          <div key={index} className="tag-rectangle">
-            {tag}
-          </div>
-        ))}
-      </div>
+      <div className="added-tags">{tagRectangles}</div>
 
       {filteredHeroesList.map((hero: HeroesData, index) => {
         const colorClass = index % 6 < 3 ? "blue-item" : "red-item";
