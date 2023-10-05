@@ -10,6 +10,9 @@ function Heroes() {
   const [expandedHeroIndex, setExpandedHeroIndex] = useState<number | null>(
     null
   );
+  const [filteredHeroesList, setFilteredHeroesList] = useState<HeroesData[]>(
+    []
+  );
 
   async function fetchData() {
     const response = await fetch(
@@ -22,8 +25,30 @@ function Heroes() {
     fetchData();
   }, []);
 
-  const handleInputChange = (event: any) => {
-    setFilterName(event.target.value);
+  useEffect(() => {
+    setFilteredHeroesList(data);
+  }, [data]);
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = event.target.value.toLowerCase().trim();
+
+    if (inputValue === "") {
+      setFilteredHeroesList(data);
+    } else {
+      const inputParts = inputValue.split(" ").filter((part) => part !== "");
+      const filteredHeroes = data.filter((hero) => {
+        const heroName = hero.name.toLowerCase();
+        const heroTags = (tags[hero.id] || []).map((tag) => tag.toLowerCase());
+
+        return inputParts.some(
+          (part) => heroName.includes(part) || heroTags.includes(part)
+        );
+      });
+
+      setFilteredHeroesList(filteredHeroes);
+    }
+
+    setFilterName(inputValue);
   };
 
   const handleTagInputChange = (event: any) => {
@@ -50,10 +75,6 @@ function Heroes() {
     }
   };
 
-  const filteredHeroes = data.filter((hero) =>
-    hero.name.toLowerCase().includes(filterName.toLowerCase())
-  );
-
   const allTags: string[] = [];
   Object.values(tags).forEach((heroTags) => {
     allTags.push(...heroTags);
@@ -71,14 +92,14 @@ function Heroes() {
         />
       </div>
       <div className="added-tags">
-        {allTags.map((tag, index) => (
+        {Array.from(new Set(allTags)).map((tag, index) => (
           <div key={index} className="tag-rectangle">
             {tag}
           </div>
         ))}
       </div>
 
-      {filteredHeroes.map((hero: HeroesData, index) => {
+      {filteredHeroesList.map((hero: HeroesData, index) => {
         const colorClass = index % 6 < 3 ? "blue-item" : "red-item";
         const isExpanded = expandedHeroIndex === index;
         const heroId = hero.id;
