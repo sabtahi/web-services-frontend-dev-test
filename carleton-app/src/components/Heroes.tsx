@@ -5,6 +5,8 @@ import "./Heroes.css";
 function Heroes() {
   const [data, setData] = useState<HeroesData[]>([]);
   const [filterName, setFilterName] = useState("");
+  const [tags, setTags] = useState<Record<number, string[]>>({});
+  const [tagName, setTagName] = useState("");
   const [expandedHeroIndex, setExpandedHeroIndex] = useState<number | null>(
     null
   );
@@ -24,13 +26,33 @@ function Heroes() {
     setFilterName(event.target.value);
   };
 
+  const handleTagInputChange = (event: any) => {
+    setTagName(event.target.value);
+  };
+
   const handleTogglePowers = (index: number) => {
     setExpandedHeroIndex((prevIndex) => (prevIndex === index ? null : index));
+  };
+
+  const handleAddTag = (heroId: number) => {
+    if (tagName.trim() !== "") {
+      setTags((prevTags) => {
+        const newTags = { ...prevTags };
+        newTags[heroId] = [...(newTags[heroId] || []), tagName];
+        return newTags;
+      });
+      setTagName("");
+    }
   };
 
   const filteredHeroes = data.filter((hero) =>
     hero.name.toLowerCase().includes(filterName.toLowerCase())
   );
+
+  const allTags: string[] = [];
+  Object.values(tags).forEach((heroTags) => {
+    allTags.push(...heroTags);
+  });
 
   const heroesList = (
     <div className="heroes-list">
@@ -43,11 +65,19 @@ function Heroes() {
           onChange={handleInputChange}
         />
       </div>
+      <div className="added-tags">
+        {allTags.map((tag, index) => (
+          <div key={index} className="tag-rectangle">
+            {tag}
+          </div>
+        ))}
+      </div>
 
       {filteredHeroes.map((hero: HeroesData, index) => {
         const colorClass = index % 6 < 3 ? "blue-item" : "red-item";
         const isExpanded = expandedHeroIndex === index;
-
+        const heroId = hero.id;
+        const heroTags = tags[heroId] || [];
         return (
           <div
             key={index}
@@ -72,6 +102,30 @@ function Heroes() {
                     <p>Durability: {hero.powerstats.durability}%</p>
                     <p>Power: {hero.powerstats.power}%</p>
                     <p>Combat: {hero.powerstats.combat}%</p>
+                  </div>
+
+                  <h3 className="title">Tags</h3>
+                  <div className="tag">
+                    <input
+                      type="text"
+                      className="tag-text-input"
+                      placeholder="Add tag"
+                      value={tagName}
+                      onChange={handleTagInputChange}
+                    />
+                    <button
+                      className="tag-button"
+                      onClick={() => handleAddTag(heroId)}
+                    >
+                      Add tag
+                    </button>
+                  </div>
+                  <div>
+                    {heroTags.map((tag, tagIndex) => (
+                      <div key={tagIndex} className="tag-rectangle">
+                        {tag}
+                      </div>
+                    ))}
                   </div>
                 </div>
               )}
