@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { HeroesData } from "./heroesInterfaces";
+import "./Heroes.css";
 
 function Heroes() {
   const [data, setData] = useState<HeroesData[]>([]);
@@ -16,20 +17,27 @@ function Heroes() {
   }, []);
 
   const heroesList = (
-    <div>
-      {data.map((hero: HeroesData, index) => (
-        <div key={index}>
-          <img src={hero.images.sm} alt="React Image" />
-          <h2>{hero.name}</h2>
-          <p>Fullname: {hero.biography.fullName}</p>
-          <p>Race: {hero.appearance.race}</p>
-          <p>Alignment: {hero.biography.alignment}</p>
-          <p>Publisher: {hero.biography.publisher}</p>
-        </div>
-      ))}
+    <div className="test">
+      {data.map((hero: HeroesData, index) => {
+        const colorClass = index % 6 < 3 ? "blue-item" : "red-item";
+        return (
+          <div key={index} className="card-container">
+            <div className="card-image">
+              <img src={hero.images.sm} alt="React Image" />
+            </div>
+            <div className={colorClass}>
+              <h2>{hero.name}</h2>
+              <p>Fullname: {hero.biography.fullName}</p>
+              <p>Race: {hero.appearance.race}</p>
+              <p>Alignment: {hero.biography.alignment}</p>
+              <p>Publisher: {hero.biography.publisher}</p>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
-  return <> {heroesList}</>;
+  return <div className="body"> {heroesList}</div>;
 }
 
 export default Heroes;
