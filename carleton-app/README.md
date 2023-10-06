@@ -18,9 +18,10 @@ The Heroes App is a web application that allows users to explore a collection of
 ## Set up
 
 - Clone the repository to your local machine.
+- Open carleton-app folder on the repository
 - Install the necessary dependencies using npm install.
 - Run the app locally using npm start.
-- Open carleton-app folder on the repository
+
 
 ## Usage
 
