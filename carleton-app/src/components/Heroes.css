@@ -35,6 +35,9 @@
 .card-container p {
   margin: 5px;
 }
+.card-container h2 {
+  margin: 5px;
+}
 
 .card-container.expanded {
   height: auto;
@@ -50,11 +53,11 @@
 
 .blue-item {
   color: blue;
-  margin-left: 20px;
+  margin: 20px;
 }
 
 .red-item {
-  margin-left: 20px;
+  margin: 20px;
   color: red;
 }
 
@@ -72,7 +75,7 @@
 
 .toggle {
   cursor: pointer;
-  padding-top: 20px;
+  padding-top: 10px;
 }
 
 .toggle-circle {
@@ -85,6 +88,11 @@
   background-color: #f8f2f2;
   color: rgb(68, 66, 66);
   font-weight: bold;
+}
+
+.toggle-circle:hover {
+  background-color: #646464;
+  color: rgb(255, 255, 255);
 }
 
 .title {
